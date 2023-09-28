@@ -1,0 +1,142 @@
+Router R1:-
+-------------------------------------------
+ interface FastEthernet0/0
+ ip address 178.41.41.1 255.255.255.224
+router ospf 100
+network 178.41.41.0 0.0.0.31 area 0
+
+Router R2:-
+-------------------------------------------
+interface FastEthernet0/0
+ ip address 178.41.41.2 255.255.255.224
+router ospf 100
+network 178.41.41.0 0.0.0.31 area 0
+
+Router R3:-
+-------------------------------------------
+interface Loopback0
+ ip address 3.3.3.3 255.255.255.255
+interface FastEthernet0/0
+ ip address 178.41.41.3 255.255.255.224
+interface FastEthernet0/1
+ ip address 178.41.41.33 255.255.255.224
+router ospf 100
+ router-id 3.3.3.3
+ log-adjacency-changes
+ area 1 virtual-link 4.4.4.4
+ network 178.41.41.0 0.0.0.31 area 0
+ network 178.41.41.32 0.0.0.31 area 1
+
+Router R4:-
+-------------------------------------------
+interface Loopback0
+ ip address 4.4.4.4 255.255.255.255
+interface FastEthernet0/0
+ ip address 178.41.41.34 255.255.255.224
+interface FastEthernet0/1
+ ip address 178.41.41.65 255.255.255.224
+router ospf 100
+ router-id 4.4.4.4
+area 1 virtual-link 3.3.3.3
+ area 42 virtual-link 5.5.5.5
+ network 178.41.41.32 0.0.0.31 area 1
+ network 178.41.41.64 0.0.0.31 area 42
+
+Router R5:-
+-------------------------------------------
+interface Loopback0
+ ip address 5.5.5.5 255.255.255.255
+interface FastEthernet0/0
+ ip address 178.41.41.66 255.255.255.224
+interface FastEthernet0/1
+ ip address 178.41.41.97 255.255.255.224
+router ospf 100
+ router-id 5.5.5.5
+area 42 virtual-link 4.4.4.4
+ network 178.41.41.64 0.0.0.31 area 42
+ network 178.41.41.96 0.0.0.31 area 43
+
+Router R6:-
+-------------------------------------------
+interface FastEthernet0/0
+ ip address 178.41.41.67 255.255.255.224
+interface FastEthernet0/1
+ ip address 178.41.41.98 255.255.255.224
+router ospf 100
+ network 178.41.41.64 0.0.0.31 area 42
+ network 178.41.41.96 0.0.0.31 area 43
+
+Router R7:-
+-------------------------------------------
+interface FastEthernet0/0
+ ip address 178.41.41.99 255.255.255.224
+interface FastEthernet0/1
+ ip address 178.41.41.129 255.255.255.224
+router eigrp 100
+ redistribute ospf 100
+ network 178.41.0.0
+ no auto-summary
+router ospf 100
+ log-adjacency-changes
+ redistribute eigrp 100 subnets
+ network 178.41.41.96 0.0.0.31 area 43
+
+Router 8:-
+-------------------------------------------
+interface FastEthernet0/0
+ ip address 178.41.41.100 255.255.255.224
+interface FastEthernet0/1
+ ip address 178.41.41.130 255.255.255.224
+interface FastEthernet1/0
+ ip address 178.41.41.161 255.255.255.224
+router eigrp 100
+ redistribute ospf 100
+ network 178.41.0.0
+ no auto-summary
+router ospf 100
+ log-adjacency-changes
+ redistribute eigrp 100 subnets
+ network 178.41.41.96 0.0.0.31 area 43
+
+Router R9:-
+-------------------------------------------
+interface FastEthernet0/0
+ ip address 178.41.41.101 255.255.255.224
+interface FastEthernet0/1
+ ip address 178.41.41.162 255.255.255.224
+interface FastEthernet1/0
+ ip address 178.41.41.193 255.255.255.224
+router eigrp 100
+ redistribute ospf 100
+ network 178.41.0.0
+ no auto-summary
+router ospf 100
+redistribute eigrp 100 subnets
+ network 178.41.41.96 0.0.0.31 area 43
+
+Router R10:-
+-------------------------------------------
+interface FastEthernet0/0
+ ip address 178.41.41.102 255.255.255.224
+interface FastEthernet0/1
+ ip address 178.41.41.194 255.255.255.224
+router eigrp 100
+ redistribute ospf 100
+ network 178.41.0.0
+ no auto-summary
+router ospf 100
+ redistribute eigrp 100 subnets
+ network 178.41.41.96 0.0.0.31 area 43
+
+
+
+
+
+
+
+
+
+
+
+
+
